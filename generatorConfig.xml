@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="mysql-connector-java-5.1.44-bin.jar" />
+	<context id="StockTracker" targetRuntime="MyBatis3">
+
+		<!-- 生成的Java文件的编码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 格式化java代码 -->
+		<property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+		<!-- 格式化XML代码 -->
+		<property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/stocktracker?useSSL=false" userId="root" password="root">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.mybatis.model" targetProject="src">
+			<property name="constructorBased" value="true" />
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mappers" targetProject="config">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.dao" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="stock" domainObjectName="Stock">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="hypothesis_result" domainObjectName="HypothesisResult">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="market_index" domainObjectName="MarketIndex">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="market_index_history" domainObjectName="MarketIndexHistory">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_buysell_point" domainObjectName="StockBuysellPoint">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_category" domainObjectName="StockCategory">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_category_ref" domainObjectName="StockCategoryRef">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_extend_info" domainObjectName="StockExtendInfo">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_history" domainObjectName="StockHistory">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_income_statement_history" domainObjectName="StockIncomeStatementHistory">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stockkdj" domainObjectName="StockKdj">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stockma" domainObjectName="StockMa">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stockmacd" domainObjectName="StockMacd">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		<table tableName="stock_trading_date" domainObjectName="StockTradingDate">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+
+	</context>
+</generatorConfiguration>

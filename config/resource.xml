@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="dbconfig.properties"></properties>
+	<!-- <typeAliases>
+		<typeAlias alias="User" type="com.yiibai.mybatis.models.User" />
+	</typeAliases> -->
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<!-- // power by http://www.yiibai.com -->
+		<mapper resource="mappers/HypothesisResultMapper.xml" />
+		<mapper resource="mappers/MarketIndexHistoryMapper.xml" />
+		<mapper resource="mappers/MarketIndexMapper.xml" />
+		<mapper resource="mappers/StockBuysellPointMapper.xml" />
+		<mapper resource="mappers/StockCategoryMapper.xml" />
+		<mapper resource="mappers/StockCategoryRefMapper.xml" />
+		<mapper resource="mappers/StockExtendInfoMapper.xml" />
+		<mapper resource="mappers/StockHistoryMapper.xml" />
+		<mapper resource="mappers/StockIncomeStatementHistoryMapper.xml" />
+		<mapper resource="mappers/StockKdjMapper.xml" />
+		<mapper resource="mappers/StockMacdMapper.xml" />
+		<mapper resource="mappers/StockMaMapper.xml" />
+		<mapper resource="mappers/StockMapper.xml" />
+		<mapper resource="mappers/StockTradingDateMapper.xml" />
+	</mappers>
+</configuration>
