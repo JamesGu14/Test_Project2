@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.algorithm.form.TwoSmallRaise;
+import com.algorithm.form.CandleForm;
 import com.mybatis.business.StockHistoryRepository;
 import com.mybatis.business.StockRepository;
 import com.mybatis.model.Stock;
@@ -60,7 +60,7 @@ public class TestTwoSmallRaise {
 
 				List<StockHistory> threeDayHistory = stockHistories.subList(i - 2, i + 1);
 
-				if (TwoSmallRaise.Justify(threeDayHistory)) {
+				if (CandleForm.JustifyTwinPeak(threeDayHistory)) {
 					System.out.println("Find satisfication: " + stock.getStockCode() + " " + stockHistories.get(i).getStockDay());
 				}
 			}
