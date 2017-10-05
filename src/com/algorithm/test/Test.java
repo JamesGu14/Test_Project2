@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.algorithm.form.CandleForm;
+import com.algorithm.form.CandleForms;
 import com.mybatis.model.StockHistory;
 
 public class Test {
@@ -20,7 +20,7 @@ public class Test {
 		list.add(day2);
 		list.add(day3);
 		
-		System.out.println(CandleForm.JustifyTwinPeak(list));
+		System.out.println(CandleForms.JustifyTwinPeak(list));
 	}
 
 	@org.junit.Test

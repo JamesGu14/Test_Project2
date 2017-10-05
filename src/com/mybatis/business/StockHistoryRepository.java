@@ -39,4 +39,11 @@ public class StockHistoryRepository {
 		
 		return stockHistoryDao.selectByExample(stockHistoryExample);
 	}
+
+	public List<StockHistory> GetHistoryByStockIdAndDate(int stockId, Date startDate, int days) {
+		StockHistoryExample stockHistoryExample = new StockHistoryExample();
+		stockHistoryExample.createCriteria().andStockIdEqualTo(stockId).andStockDayGreaterThan(startDate);
+		stockHistoryExample.setOrderByClause("stock_day");
+		return stockHistoryDao.selectByExample(stockHistoryExample);
+	}
 }

@@ -6,7 +6,7 @@
 <generatorConfiguration>
 	<classPathEntry location="mysql-connector-java-5.1.44-bin.jar" />
 	<context id="StockTracker" targetRuntime="MyBatis3">
-
+		
 		<!-- 生成的Java文件的编码 -->
 		<property name="javaFileEncoding" value="UTF-8" />
 		<!-- 格式化java代码 -->
@@ -14,6 +14,8 @@
 		<!-- 格式化XML代码 -->
 		<property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
 
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+		
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/stocktracker?useSSL=false" userId="root" password="root">
 		</jdbcConnection>
 
@@ -35,10 +37,10 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="stockmacd" domainObjectName="StockMacd">
+		<table tableName="stock_history" domainObjectName="StockHistory">
 			<property name="useActualColumnNames" value="false" />
 		</table>
-
+	
 		<!-- <table tableName="stock" domainObjectName="Stock">
 			<property name="useActualColumnNames" value="false" />
 		</table>
@@ -81,7 +83,7 @@
 		<table tableName="stock_trading_date" domainObjectName="StockTradingDate">
 			<property name="useActualColumnNames" value="false" />
 		</table> -->
-		
+
 
 	</context>
 </generatorConfiguration>
