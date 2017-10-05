@@ -31,9 +31,12 @@ public class StockHistoryRepository {
 	
 	public List<StockHistory> GetHistoryByStockIdAndDate(int stockId, Date startDate, Date endDate) {
 		StockHistoryExample stockHistoryExample = new StockHistoryExample();
-		stockHistoryExample.createCriteria().andStockIdEqualTo(stockId).andStockDayBetween(startDate, endDate);
+		if (endDate != null) {
+			stockHistoryExample.createCriteria().andStockIdEqualTo(stockId).andStockDayBetween(startDate, endDate);
+		} else {
+			stockHistoryExample.createCriteria().andStockIdEqualTo(stockId).andStockDayGreaterThanOrEqualTo(startDate);
+		}
 		
 		return stockHistoryDao.selectByExample(stockHistoryExample);
 	}
-
 }

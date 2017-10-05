@@ -1,5 +1,6 @@
 package com.mybatis.business;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,6 +24,17 @@ public class StockMaRepository {
 	public List<StockMa> GetStockMaByStockId(int stockId) {
 		StockMaExample stockMaExample = new StockMaExample();
 		stockMaExample.createCriteria().andStockIdEqualTo(stockId);
+
+		return stockMaDao.selectByExample(stockMaExample);
+	}
+	
+	public List<StockMa> GetStockMaByStockIdAndDate(int stockId, Date startDate, Date endDate) {
+		StockMaExample stockMaExample = new StockMaExample();
+		if(endDate != null) {
+			stockMaExample.createCriteria().andStockIdEqualTo(stockId).andStockDateBetween(startDate, endDate);
+		} else {
+			stockMaExample.createCriteria().andStockIdEqualTo(stockId).andStockDateGreaterThan(startDate);
+		}
 
 		return stockMaDao.selectByExample(stockMaExample);
 	}

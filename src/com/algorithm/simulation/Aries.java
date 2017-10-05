@@ -5,7 +5,7 @@ package com.algorithm.simulation;
  * 
  */
 public class Aries {
-
+	
 }
 
 
