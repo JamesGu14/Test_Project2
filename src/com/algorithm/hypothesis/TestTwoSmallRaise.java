@@ -8,21 +8,22 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.algorithm.form.ThreeSmallRaise;
+import com.algorithm.form.TwoSmallRaise;
 import com.mybatis.business.StockHistoryRepository;
 import com.mybatis.business.StockRepository;
 import com.mybatis.model.Stock;
 import com.mybatis.model.StockHistory;
 import com.utility.Utility;
 
-public class TestThreeSmallRaise {
+public class TestTwoSmallRaise {
 	private SqlSession sqlSession;
 	private StockRepository stockRepository;
 	private StockHistoryRepository stockHistoryRepository;
 
 	private List<Stock> allStocks;
 
-	public TestThreeSmallRaise() {
+	
+	public TestTwoSmallRaise() {
 		try {
 			sqlSession = Utility.GetSqlSession();
 			stockRepository = new StockRepository(sqlSession);
@@ -57,9 +58,9 @@ public class TestThreeSmallRaise {
 
 			for (int i = startIndex; i < endIndex; i++) {
 
-				List<StockHistory> fourDayHistory = stockHistories.subList(i - 3, i + 1);
+				List<StockHistory> threeDayHistory = stockHistories.subList(i - 2, i + 1);
 
-				if (ThreeSmallRaise.Justify(fourDayHistory)) {
+				if (TwoSmallRaise.Justify(threeDayHistory)) {
 					System.out.println("Find satisfication: " + stock.getStockCode() + " " + stockHistories.get(i).getStockDay());
 				}
 			}
@@ -70,7 +71,7 @@ public class TestThreeSmallRaise {
 	}
 
 	public static void main(String[] args) {
-		new TestThreeSmallRaise();
+		new TestTwoSmallRaise();
 	}
 
 }

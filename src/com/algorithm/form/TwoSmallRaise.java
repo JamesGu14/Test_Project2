@@ -7,24 +7,26 @@ import java.util.List;
 
 import com.mybatis.model.StockHistory;
 
-public class ThreeSmallRaise {
 
-	public static boolean Justify(List<StockHistory> fourDaysHistory) {
+// 双子K线涨停
+public class TwoSmallRaise {
+
+	public static boolean Justify(List<StockHistory> threeDayHistory) {
 		
-		if (fourDaysHistory.size() != 4) {
+		if (threeDayHistory.size() != 3) {
 			throw new InvalidParameterException("Require 4 days history");
 		}
 		
 		boolean satisfied = true;
 		
-		StockHistory firstDay = fourDaysHistory.get(0);
+		StockHistory firstDay = threeDayHistory.get(0);
 		
 		if (firstDay.getClosePrice().subtract(firstDay.getOpenPrice()).divide(firstDay.getOpenPrice(), 4, RoundingMode.HALF_UP).compareTo(new BigDecimal("-0.05")) > 0) {
 			satisfied = false;
 		}
 		
-		for(int i = 1; i < 4; i ++) {
-			StockHistory today = fourDaysHistory.get(i);
+		for(int i = 1; i < threeDayHistory.size(); i ++) {
+			StockHistory today = threeDayHistory.get(i);
 			if (today.getClosePrice().subtract(today.getOpenPrice()).compareTo(new BigDecimal(0)) <= 0
 				|| today.getClosePrice().subtract(today.getOpenPrice()).divide(today.getOpenPrice(), 4, RoundingMode.HALF_UP).compareTo(new BigDecimal("0.02")) > 0) {
 				satisfied = false;
