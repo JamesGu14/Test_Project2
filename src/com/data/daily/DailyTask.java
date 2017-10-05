@@ -33,17 +33,17 @@ public class DailyTask {
 		// Step 1. Import stock list from Aliyun API call
 		// ImportStocks();
 		
-		// Step 2. Import stock history from csv files from Tongdaxin
-		ImportStockHistory();
-		
-		// Step 3. Calculate MA indicator
-		CalMa();
-		
-		// Step 4. Calculate MACD indicator
-		CalMacd();
-		
-		// Step 5. Calculate KDJ indicator
-		CalKdj();
+//		// Step 2. Import stock history from csv files from Tongdaxin
+//		ImportStockHistory();
+//		
+//		// Step 3. Calculate MA indicator
+//		CalMa();
+//		
+//		// Step 4. Calculate MACD indicator
+//		CalMacd();
+//		
+//		// Step 5. Calculate KDJ indicator
+//		CalKdj();
 	}
 	
 	public static void main(String[] args) {

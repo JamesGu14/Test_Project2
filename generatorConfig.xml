@@ -35,7 +35,11 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="stock" domainObjectName="Stock">
+		<table tableName="stockmacd" domainObjectName="StockMacd">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<!-- <table tableName="stock" domainObjectName="Stock">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 		<table tableName="hypothesis_result" domainObjectName="HypothesisResult">
@@ -76,7 +80,7 @@
 		</table>
 		<table tableName="stock_trading_date" domainObjectName="StockTradingDate">
 			<property name="useActualColumnNames" value="false" />
-		</table>
+		</table> -->
 		
 
 	</context>

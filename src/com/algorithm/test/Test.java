@@ -22,4 +22,12 @@ public class Test {
 		
 		System.out.println(TwoSmallRaise.Justify(list));
 	}
+
+	@org.junit.Test
+	public void MyTest() {
+		
+		float a = (float)1.11;
+		float b = (float)2.22;
+		System.out.println(a < b);
+	}
 }

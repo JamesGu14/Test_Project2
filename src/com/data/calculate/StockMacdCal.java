@@ -9,12 +9,14 @@ import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.algorithm.form.MacdForms;
 import com.mybatis.business.StockHistoryRepository;
 import com.mybatis.business.StockMacdRepository;
 import com.mybatis.business.StockRepository;
 import com.mybatis.model.Stock;
 import com.mybatis.model.StockHistory;
 import com.mybatis.model.StockHistoryExample;
+import com.mybatis.model.StockMa;
 import com.mybatis.model.StockMacd;
 import com.utility.Utility;
 
@@ -24,7 +26,7 @@ public class StockMacdCal {
 	private StockRepository stockRepository;
 	private StockMacdRepository stockMacdRepository;
 	private StockHistoryRepository stockHistoryRepository;
-	
+
 	private Date startCalDate;
 	private List<Stock> allStocks;
 
@@ -40,12 +42,45 @@ public class StockMacdCal {
 			allStocks = stockRepository.GetAllStocks();
 
 			StartCalculate();
+			CalculateGoldenDead();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			sqlSession.close();
+		}
+	}
+
+	private void CalculateGoldenDead() {
+		System.out.println("Start calculating Golden Cross and Dead Cross");
+		int index = 1;
+		for (Stock stock : allStocks) {
+			System.out.print("(" + (index++) + "/" + allStocks.size() + ") Start calculating MACD Golden and Dead cross for stock: " + stock.getStockCode() + " ");
+			int currentStockId = stock.getId();
+			
+			List<StockMacd> allMacd = stockMacdRepository.GetStockMacdByStockId(currentStockId);
+			List<StockMacd> needUpdateList = new ArrayList<StockMacd>();
+
+			for (int j = 1; j < allMacd.size(); j++) {
+				StockMacd yesterday = allMacd.get(j - 1);
+				StockMacd today = allMacd.get(j);
+				
+				if (MacdForms.IsGoldenCross(yesterday, today)) {
+					today.setIsGoldencross(true);
+					needUpdateList.add(today);
+				}
+				
+				if (MacdForms.IsDeadCross(yesterday, today)) {
+					today.setIsDeadcross(true);
+					needUpdateList.add(today);
+				}
+			}
+			
+			System.out.println("Need update count: " + needUpdateList.size());
+			needUpdateList.forEach(macd -> {
+				stockMacdRepository.getStockMacdDao().updateByPrimaryKey(macd);
+			});
 		}
 	}
 
@@ -94,12 +129,12 @@ public class StockMacdCal {
 
 		// Step 4. Check if current stock has first day MACD
 		// If not, add the first day
-		
+
 		if (existingMacdList.stream().noneMatch(m -> m.getStockHistoryId() == firstDayStockHistoryId)) {
 
 			StockHistory stockFirstDay = allHistory.get(0);
-			StockMacd firstDayMacd = new StockMacd(null, stockFirstDay.getStockId(), stockFirstDay.getStockDay(), stockFirstDay.getClosePrice().floatValue(), 
-					stockFirstDay.getClosePrice().floatValue(), (float) 0, (float) 0, (float) 0, stockFirstDay.getId());
+			StockMacd firstDayMacd = new StockMacd(null, stockFirstDay.getStockId(), stockFirstDay.getStockDay(), stockFirstDay.getClosePrice().floatValue(), stockFirstDay.getClosePrice().floatValue(), (float) 0, (float) 0, (float) 0,
+					stockFirstDay.getId(), false, false);
 
 			// stockMacdDao.insert(firstDayMacd);
 			existingMacdList.add(firstDayMacd);
