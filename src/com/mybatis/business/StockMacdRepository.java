@@ -33,7 +33,7 @@ public class StockMacdRepository {
 		if (endDate != null) {
 			stockMacdExample.createCriteria().andStockIdEqualTo(stockId).andStockDayBetween(startDate, endDate);
 		} else {
-			stockMacdExample.createCriteria().andStockIdEqualTo(stockId).andStockDayGreaterThan(startDate);
+			stockMacdExample.createCriteria().andStockIdEqualTo(stockId).andStockDayGreaterThanOrEqualTo(startDate);
 		}
 		return stockMacdDao.selectByExample(stockMacdExample);
 	}

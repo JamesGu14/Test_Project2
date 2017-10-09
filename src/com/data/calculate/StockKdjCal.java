@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +17,8 @@ import com.mybatis.model.Stock;
 import com.mybatis.model.StockHistory;
 import com.mybatis.model.StockHistoryExample;
 import com.mybatis.model.StockKdj;
+import com.utility.MaxPriceComparator;
+import com.utility.MinPriceComparator;
 import com.utility.Utility;
 
 public class StockKdjCal {
@@ -236,22 +237,7 @@ public class StockKdjCal {
 		
 		return existingTodayKdj;
 	}
-
-	private class MaxPriceComparator implements Comparator<StockHistory> {
-
-		@Override
-		public int compare(StockHistory s1, StockHistory s2) {
-			return s1.getMaxPrice().compareTo(s2.getMaxPrice());
-		}
-	}
 	
-	private class MinPriceComparator implements Comparator<StockHistory> {
-
-		@Override
-		public int compare(StockHistory s1, StockHistory s2) {
-			return s1.getMinPrice().compareTo(s2.getMinPrice());
-		}
-	}
 }
 
 

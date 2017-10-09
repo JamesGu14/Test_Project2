@@ -3,6 +3,7 @@ package com.mybatis.business;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.mybatis.dao.StockHistoryDao;
@@ -42,8 +43,9 @@ public class StockHistoryRepository {
 
 	public List<StockHistory> GetHistoryByStockIdAndDate(int stockId, Date startDate, int days) {
 		StockHistoryExample stockHistoryExample = new StockHistoryExample();
-		stockHistoryExample.createCriteria().andStockIdEqualTo(stockId).andStockDayGreaterThan(startDate);
+		stockHistoryExample.createCriteria().andStockIdEqualTo(stockId).andStockDayGreaterThanOrEqualTo(startDate);
 		stockHistoryExample.setOrderByClause("stock_day");
-		return stockHistoryDao.selectByExample(stockHistoryExample);
+		RowBounds rowBounds = new RowBounds(0, days);
+		return stockHistoryDao.selectByExampleWithRowbounds(stockHistoryExample, rowBounds);
 	}
 }

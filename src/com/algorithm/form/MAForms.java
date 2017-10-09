@@ -1,7 +1,5 @@
 package com.algorithm.form;
 
-import java.util.List;
-
 import com.mybatis.model.StockMa;
 
 public class MAForms {
@@ -12,12 +10,13 @@ public class MAForms {
 	 * @param maList
 	 * @return
 	 */
-	public static boolean IsLongMa(List<StockMa> maList) {
+	public static boolean IsLongMa(StockMa ma) {
 
-		for (StockMa ma : maList) {
-			if (ma.getMa30().compareTo(ma.getMa20()) < 0 || ma.getMa20().compareTo(ma.getMa10()) < 0 || ma.getMa10().compareTo(ma.getMa5()) < 0) {
-				return false;
-			}
+		if(ma.getMa20Raisedays() <= 3) return false;
+		if(ma.getMa30Raisedays() <= 3) return false;
+		
+		if (ma.getMa30().compareTo(ma.getMa20()) >= 0 || ma.getMa20().compareTo(ma.getMa10()) >= 0 || ma.getMa10().compareTo(ma.getMa5()) >= 0) {
+			return false;
 		}
 		return true;
 	}

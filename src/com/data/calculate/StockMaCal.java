@@ -43,7 +43,7 @@ public class StockMaCal {
 			// allDates = CalCommon.GetAllStockTradingDate(stockTradingDateDao);
 
 			// TODO: Get it back when running real daily task
-			StartCalculate();
+			// StartCalculate();
 
 			// Calculate consecutive raising/drop days
 			StartCalculateRaiseDrop();

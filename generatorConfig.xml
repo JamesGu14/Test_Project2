@@ -33,7 +33,7 @@
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.dao" targetProject="src">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.dao" targetProject="src" >
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 

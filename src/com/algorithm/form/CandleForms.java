@@ -47,7 +47,12 @@ public class CandleForms {
 	 * 2. 红柱且长下影线
 	 * 
 	 */
-	public static boolean TurnPoint(StockHistory stockHistory, StockMa stockMa) {
+	public static boolean IsTurnPoint(StockHistory stockHistory, StockMa stockMa) {
+		
+		if (!stockMa.getStockHistoryId().equals(stockHistory.getId())) {
+			//throw new InvalidParameterException("Stock ma does not belong to the same StockHistory day");
+			return false;
+		}
 		
 		// 是一个红柱
 		if (stockHistory.getClosePrice().compareTo(stockHistory.getOpenPrice()) <= 0) {
@@ -61,8 +66,38 @@ public class CandleForms {
 		if (stockMa.getMa20().compareTo(closePrice) <= 0) return false;
 		if (stockMa.getMa30().compareTo(closePrice) <= 0) return false;
 		
+		// 上影线短或没有，下影线长
+		BigDecimal lowerShadow = stockHistory.getOpenPrice().subtract(stockHistory.getMinPrice());
+		BigDecimal upperShadow = stockHistory.getMaxPrice().subtract(stockHistory.getClosePrice());
+		BigDecimal candleBody = stockHistory.getClosePrice().subtract(stockHistory.getOpenPrice());
 		
+		if (lowerShadow.compareTo(upperShadow) < 0) return false;
+		if (lowerShadow.compareTo(candleBody) < 0) return false;
 		
 		return true;
+	}
+
+	/**
+	 * 阳线上传20日均线
+	 * List 传2天参数，前一天在20日线下，后一天上穿20日线
+	 */
+	public static boolean UpcrossMA20(List<StockHistory> stockHistoryList, List<StockMa> stockMaList) {
+		
+		for(int i = 0; i < stockHistoryList.size(); i++) {
+			
+			StockHistory stockHistory = stockHistoryList.get(i);
+			StockMa todayMa = stockMaList.get(i);
+			if (!stockHistory.getId().equals(todayMa.getStockHistoryId())) {
+				System.out.println("Error: does not equal");
+				continue;
+			}
+		}
+		
+		// 是一个红柱
+//		if (stockHistory.getClosePrice().compareTo(stockHistory.getOpenPrice()) <= 0) {
+//			return false;
+//		}
+//		
+		return false;
 	}
 }
